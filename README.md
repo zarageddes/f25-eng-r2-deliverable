@@ -76,7 +76,6 @@ git clone git@github.com:hcs-t4sg/f25-eng-r2-deliverable.git
 2. Open a terminal in the project folder by dragging up from the bottom of the code window or by going to `Terminal > New Terminal` in the menu bar.
 
 3. Run: `npm install` (`npm i` for short)
-
    - If you get something like "command not found", you might not have `npm` installed.
    - Make sure you're running `npm install` inside the project directory. That is, your terminal should indicate you're inside the `f25-eng-r2-deliverable` directory. If you're using MacOS (with a `zsh` terminal), this probably looks something like:
      ```bash
@@ -101,11 +100,9 @@ git clone git@github.com:hcs-t4sg/f25-eng-r2-deliverable.git
 #### Supabase Connection Setup
 
 1. Visit the Supabase website, create an account (or login if you already have one), and create a new project. You will be prompted to set a **Database Password; remember it**. Wait for your database provisioning and setup to finish.
-
    - Try to avoid using special characters like `?`, `$`, etc. in your password.
 
 2. There is a `.env.example` file in your local project directory (e.g. in VSCode). Duplicate it (into the same directory) and rename to `.env`. Inside `.env`, set the following variables according to your Supabase project settings:
-
    - `NEXT_PUBLIC_SUPABASE_URL`: From Project Settings > Data API > Project URL.
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: From Project Settings > API Keys > Legacy API Keys > `anon` `public`.
    - `SECRET_SUPABASE_CONNECTION_STRING`: Project Overview > Connect (in the nav bar)> Direct connection. Replace `[YOUR-PASSWORD]` with your database password.
@@ -374,7 +371,6 @@ npm run format
 The project contains workspace-specific VSCode settings in `.vscode/settings.json`. These settings (which only apply when inside the project workspace) set the editor to:
 
 - Format with `prettier`, then lint with `eslint` on save (this is the quickest way)
-
   - (Note that we use an extension, [Format Code Action](https://marketplace.visualstudio.com/items?itemName=rohit-gohri.format-code-action&ssr=false#review-details), to achieve this specific order)
 
 - Use `prettier` as the default formatter

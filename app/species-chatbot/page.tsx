@@ -16,8 +16,56 @@ export default function SpeciesChatbot() {
     }
   };
 
+  type ChatResponse = {
+    response?: string;
+    error?: string;
+  };
+
   const handleSubmit = async () => {
-    // TODO: Implement this function
+    if (!message.trim()) return;
+
+    const userMessage = message;
+
+    setChatLog((prev) => [...prev, { role: "user", content: userMessage }]);
+
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+    
+      const raw = await res.json();
+    
+      let data: ChatResponse = {};
+    
+      if (raw && typeof raw === "object") {
+        const obj = raw as Record<string, unknown>;
+    
+        if (typeof obj.response === "string") {
+          data.response = obj.response;
+        }
+    
+        if (typeof obj.error === "string") {
+          data.error = obj.error;
+        }
+      }
+    
+      setChatLog((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          content: data.response ?? data.error ?? "No response.",
+        },
+      ]);
+    } catch (error) {
+      console.error(error);
+      setChatLog((prev) => [...prev, { role: "bot", content: "Something went wrong." }]);
+    }    
   };
 
   return (
