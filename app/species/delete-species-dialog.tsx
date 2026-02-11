@@ -61,12 +61,12 @@ export default function DeleteSpeciesDialog({ species }: { species: Species }) {
           Are you sure you want to delete <strong>{species.scientific_name}</strong>? This action cannot be undone.
         </p>
         <div className="flex gap-2">
-          <Button
-            variant="destructive"
-            onClick={handleDelete}
-            disabled={loading}
-            className="flex-auto"
-          >
+        <Button
+          variant="destructive"
+          onClick={() => void handleDelete()}
+          disabled={loading}
+          className="flex-auto"
+        >
             {loading ? "Deleting..." : "Delete"}
           </Button>
           <DialogClose asChild>

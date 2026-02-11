@@ -4,17 +4,9 @@ import { createServerSupabaseClient } from "@/lib/server-utils";
 import { redirect } from "next/navigation";
 import AddSpeciesDialog from "./add-species-dialog";
 import SpeciesCard from "./species-card";
+import type { Database } from "@/lib/schema";
 
-type Species = {
-  id: number;
-  author: string;
-  common_name: string | null;
-  description: string | null;
-  kingdom: "Animalia" | "Plantae" | "Fungi" | "Protista" | "Archaea" | "Bacteria";
-  scientific_name: string;
-  total_population: number | null;
-  image: string | null;
-};
+type Species = Database["public"]["Tables"]["species"]["Row"];
 
 export default async function SpeciesList() {
   // Create supabase server component client and obtain user session from stored cookie
