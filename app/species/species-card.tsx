@@ -14,12 +14,16 @@ import type { Database } from "@/lib/schema";
 import Image from "next/image";
 import EditSpeciesDialog from "./edit-species-dialog";
 import SpeciesDetailDialog from "./species-detail-dialog";
+import DeleteSpeciesDialog from "./delete-species-dialog";
 type Species = Database["public"]["Tables"]["species"]["Row"];
 
 export default function SpeciesCard({ species, sessionId }: { species: Species; sessionId: string }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
+      <div className="flex gap-2 mb-2">
       {species.author === sessionId && <EditSpeciesDialog species={species} />}
+      {species.author === sessionId && <DeleteSpeciesDialog species={species} />}
+      </div>
       {species.image && (
         <div className="relative h-40 w-full">
           <Image src={species.image} alt={species.scientific_name} fill style={{ objectFit: "cover" }} />
